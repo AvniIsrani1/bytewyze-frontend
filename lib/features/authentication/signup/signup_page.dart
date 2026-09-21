@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_fork/core/theme/app_spacing.dart';
 import 'package:local_fork/core/util/internal_link.dart';
+import 'package:local_fork/core/util/logo.dart';
 import 'package:local_fork/core/util/overall_padding.dart';
 import 'package:local_fork/features/authentication/signup/signup_controller.dart';
 
@@ -60,8 +61,9 @@ class _SignupPageState extends State<SignupPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Center(child: SvgPicture.asset('assets/logo.svg')),
-                          Text('Create Account', style: textTheme.titleLarge),
+                          Center(child: Logo(radius: 100)),
+                          Text('Create Account', style: textTheme.titleLarge, textAlign: TextAlign.center,),
+                          const SizedBox(height: AppSpacing.xl),
                           TextFormField(
                             controller: signupController.emailController,
                             validator: signupController.validateEmail,
@@ -69,12 +71,14 @@ class _SignupPageState extends State<SignupPage> {
                             decoration: InputDecoration(labelText: 'Email'),
                             style: textTheme.bodyMedium,
                           ),
+                          const SizedBox(height: AppSpacing.m),
                           TextFormField(
                             controller: signupController.passwordController,
                             validator: signupController.validatePassword,
                             decoration: InputDecoration(labelText: 'Password'),
                             obscureText: true,
                           ),
+                          const SizedBox(height: AppSpacing.xl),
                           ElevatedButton(
                             onPressed: signupController.signupState.isSubmitting
                                 ? null
@@ -89,7 +93,8 @@ class _SignupPageState extends State<SignupPage> {
                                   )
                                 : const Text('Sign Up'),
                           ),
-                          if (signupController.signupState.errorMessage != null)
+                          if (signupController.signupState.errorMessage != null)...[
+                            const SizedBox(height: AppSpacing.s),
                             Padding(
                               padding: const EdgeInsets.only(
                                 bottom: AppSpacing.s,
@@ -97,9 +102,14 @@ class _SignupPageState extends State<SignupPage> {
                               child: Text(
                                 signupController.signupState.errorMessage!,
                                 style: const TextStyle(color: Colors.red),
+                                textAlign: TextAlign.center,
                               ),
                             ),
+                            const SizedBox(height: AppSpacing.s)
+                          ],
+                          const SizedBox(height: AppSpacing.l),
                           RichText(
+                            textAlign: TextAlign.center,
                             text: TextSpan(
                               style: textTheme.bodySmall,
                               children: [
