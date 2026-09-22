@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:local_fork/features/equipment/selector/equipment_selector_screen.dart';
-=======
+import 'package:flutter/rendering.dart';
 import 'package:local_fork/core/theme/app_theme.dart';
 import 'package:local_fork/features/authentication/signup/signup_page.dart';
-import 'package:flutter/rendering.dart';
->>>>>>> origin/main
 
 void main() {
   // debugPaintSizeEnabled = true;

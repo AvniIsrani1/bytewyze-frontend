@@ -7,8 +7,6 @@ import 'package:local_fork/features/equipment/equipment_repository.dart';
 import 'package:local_fork/features/equipment/inventory/equipment_inventory_screen.dart';
 
 
-import 'package:flutter/material.dart';
-
 class EquipmentSelectorScreen extends StatelessWidget {
   const EquipmentSelectorScreen({super.key});
 

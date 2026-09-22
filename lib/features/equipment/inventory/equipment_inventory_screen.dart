@@ -6,15 +6,13 @@ import 'package:local_fork/core/util/overall_padding.dart';
 import 'package:local_fork/features/equipment/equipment_repository.dart';
 
 
-import 'package:flutter/material.dart';
-
-class EquipmentSelectorScreen extends StatelessWidget {
-  const EquipmentSelectorScreen({super.key});
+class EquipmentInventoryScreen extends StatelessWidget {
+  const EquipmentInventoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('Equipment Selector - TODO')),
+      body: Center(child: Text('Equipment Inventory - TODO')),
     );
   }
 }
