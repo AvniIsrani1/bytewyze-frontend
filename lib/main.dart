@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_fork/core/theme/app_theme.dart';
 import 'package:local_fork/features/authentication/signup/signup_page.dart';
-import 'package:flutter/rendering.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;

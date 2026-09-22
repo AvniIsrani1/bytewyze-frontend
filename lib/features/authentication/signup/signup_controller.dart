@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:local_fork/features/authentication/authentication_repository.dart';
 import 'package:local_fork/features/authentication/signup/signup_state.dart';
+import 'package:local_fork/features/authentication/signup/password_requirement.dart';
 
 class SignupController extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final _authRepository = AuthenticationRepository();
+
+  // live, interactive checklist of password criteria (rebuilt as user types)
+  SignupController() {
+    passwordController.addListener(notifyListeners);
+  }
+  // current password text
+  String get password => passwordController.text;
 
   SignupState _signupState = const SignupState();
 
@@ -36,20 +45,19 @@ class SignupController extends ChangeNotifier {
     if (value == null || value.isEmpty) {
       return "Password is required.";
     }
-    if (value.length < 10) {
-      return "Password must be at least 10 characters.";
+    if (PasswordRequirement.unmetBy(value).isNotEmpty) {
+      return "Password does not meet the requirements below.";
     }
-    if (!value.contains(RegExp(r"[A-Z]"))) {
-      return 'Password must contain at least one uppercase letter.';
+    return null;
+  }
+
+  // validate confirm password
+  String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Please confirm your password.";
     }
-    if (!value.contains(RegExp(r"[a-z]"))) {
-      return 'Password must contain at least one lowercase letter.';
-    }
-    if (!value.contains(RegExp(r"[0-9]"))) {
-      return 'Password must contain at least one number.';
-    }
-    if (!value.contains(RegExp(r"[^A-Za-z0-9]"))) {
-      return 'Password must contain at least one special character.';
+    if (value != passwordController.text) {
+      return "Passwords do not match.";
     }
     return null;
   }
@@ -61,7 +69,7 @@ class SignupController extends ChangeNotifier {
     }
 
     // update state fields
-    _setState(signupState.copyWith(isSubmitting: true, errorMessage: null));
+    _setState(signupState.copyWith(isSubmitting: true, clearError: true));
 
     try {
       final email = emailController.text.trim();
@@ -85,8 +93,10 @@ class SignupController extends ChangeNotifier {
   // when screen is removed, dispose of controllers
   @override
   void dispose() {
+    passwordController.removeListener(notifyListeners);
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 }
