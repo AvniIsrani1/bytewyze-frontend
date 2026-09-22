@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:local_fork/core/theme/app_theme.dart';
 import 'package:local_fork/features/authentication/signup/signup_page.dart';
+import 'package:local_fork/features/onboarding/onboarding_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
   // debugPaintSizeEnabled = true;
-  runApp(const MyApp());
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // check if this is the first download of the app (if yes, onboarding flow will be followed)
+  final preferences = await SharedPreferences.getInstance();
+  final bool isInitialOnboarding =
+      preferences.getBool("isInitialOnboarding") ?? true;
+
+  runApp(MyApp(isInitialOnboarding: isInitialOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isInitialOnboarding;
+
+  const MyApp({super.key, required this.isInitialOnboarding});
 
   // This widget is the root of the application
   @override
   Widget build(BuildContext context) {
+    const title = 'Local Fork';
+
     return MaterialApp(
-      title: 'Local Fork',
+      title: title,
       theme: AppTheme.lightTheme(),
-      home: SignupPage(title: 'Local Fork'),
+      home: isInitialOnboarding ? OnboardingPage() : SignupPage(title: title),
     );
   }
 }
