@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_fork/core/theme/app_spacing.dart';
 import 'package:local_fork/core/util/internal_link.dart';
 import 'package:local_fork/core/util/logo.dart';
@@ -39,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -58,7 +58,11 @@ class _LoginPageState extends State<LoginPage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Center(child: Logo(radius: 100)),
-                          Text('Welcome Back', style: textTheme.titleLarge, textAlign: TextAlign.center,),
+                          Text(
+                            'Welcome Back',
+                            style: textTheme.titleLarge,
+                            textAlign: TextAlign.center,
+                          ),
                           const SizedBox(height: AppSpacing.xl),
                           TextFormField(
                             controller: loginController.emailController,
@@ -99,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               child: Text(
                                 loginController.loginState.errorMessage!,
-                                style: const TextStyle(color: Colors.red),
+                                style: TextStyle(color: colorScheme.error),
                                 textAlign: TextAlign.center,
                               ),
                             ),
