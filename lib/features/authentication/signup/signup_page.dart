@@ -5,6 +5,7 @@ import 'package:local_fork/core/util/internal_link.dart';
 import 'package:local_fork/core/util/logo.dart';
 import 'package:local_fork/core/util/overall_padding.dart';
 import 'package:local_fork/features/authentication/signup/signup_controller.dart';
+import 'package:local_fork/features/authentication/login/login_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key, required this.title});
@@ -119,7 +120,8 @@ class _SignupPageState extends State<SignupPage> {
                                 WidgetSpan(
                                   child: InternalLink(
                                     text: 'Login',
-                                    onTap: () {},
+                                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LoginPage()),
+                                    ),
                                   ),
                                 ),
                                 const TextSpan(text: ' instead'),
