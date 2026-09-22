@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_fork/features/equipment/selector/equipment_selector_screen.dart';
 
 void main() {
   runApp(const MyApp());
