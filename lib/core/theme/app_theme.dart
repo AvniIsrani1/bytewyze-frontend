@@ -17,13 +17,15 @@ class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: colorScheme.surface,
       textTheme: TextTheme(
-        titleLarge: TextStyle(fontSize: 30),
+        titleLarge: TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
         bodyMedium: TextStyle(fontSize: 16),
         bodySmall: TextStyle(fontSize: 12),
       ),
-      inputDecorationTheme: const InputDecorationTheme(
-        border: OutlineInputBorder(),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0), borderSide: BorderSide.none),
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        filled:true, 
+        fillColor: colorScheme.surfaceContainerHighest.withValues(alpha:0.4),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
