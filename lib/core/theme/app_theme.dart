@@ -4,10 +4,10 @@ import 'package:local_fork/core/theme/app_colors.dart';
 class AppTheme {
   static ColorScheme light() {
     return ColorScheme.fromSeed(
-      seedColor: const Color(0xFF243E36),
-      primary: const Color(0xFF243E36),
-      secondary: const Color(0xFF7CA982),
-      tertiary: const Color(0xFF6495ED),
+      seedColor: const Color(0xFF1D4432),
+      primary: const Color(0xFF1D4432),
+      secondary: const Color(0xFF629642),
+      tertiary: const Color(0xFFC06E3C),
       surface: const Color(0xFFFFFFFF),
       error: const Color(0xFFB3261E),
     );
