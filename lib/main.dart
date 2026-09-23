@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:local_fork/core/theme/app_theme.dart';
 import 'package:local_fork/features/authentication/signup/signup_page.dart';
 import 'package:local_fork/features/onboarding/onboarding_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:local_fork/features/onboarding/onboarding_repository.dart';
 
 Future<void> main() async {
   // debugPaintSizeEnabled = true;
@@ -10,9 +10,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // check if this is the first download of the app (if yes, onboarding flow will be followed)
-  final preferences = await SharedPreferences.getInstance();
-  final bool isInitialOnboarding =
-      preferences.getBool("isInitialOnboarding") ?? true;
+  final isInitialOnboarding = await OnboardingRepository()
+      .isInitialOnboarding();
 
   runApp(MyApp(isInitialOnboarding: isInitialOnboarding));
 }
@@ -30,7 +29,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: title,
       theme: AppTheme.lightTheme(),
-      home: isInitialOnboarding ? OnboardingPage() : SignupPage(title: title),
+      home: isInitialOnboarding
+          ? const OnboardingPage()
+          : SignupPage(title: title),
     );
   }
 }
