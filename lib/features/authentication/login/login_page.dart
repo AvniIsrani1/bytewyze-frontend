@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_fork/core/theme/app_spacing.dart';
 import 'package:local_fork/core/util/internal_link.dart';
+import 'package:local_fork/core/util/logo.dart';
 import 'package:local_fork/core/util/overall_padding.dart';
 import 'package:local_fork/features/authentication/login/login_controller.dart';
 
@@ -38,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -56,8 +57,13 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Center(child: SvgPicture.asset('assets/logo.svg')),
-                          Text('Welcome Back', style: textTheme.titleLarge),
+                          Center(child: Logo(radius: 100)),
+                          Text(
+                            'Welcome Back',
+                            style: textTheme.titleLarge,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: AppSpacing.xl),
                           TextFormField(
                             controller: loginController.emailController,
                             validator: loginController.validateEmail,
@@ -65,12 +71,15 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(labelText: 'Email'),
                             style: textTheme.bodyMedium,
                           ),
+                          const SizedBox(height: AppSpacing.m),
                           TextFormField(
                             controller: loginController.passwordController,
                             validator: loginController.validatePassword,
                             decoration: InputDecoration(labelText: 'Password'),
                             obscureText: true,
+                            style: textTheme.bodyMedium,
                           ),
+                          const SizedBox(height: AppSpacing.xl),
                           ElevatedButton(
                             onPressed: loginController.loginState.isSubmitting
                                 ? null
@@ -85,23 +94,28 @@ class _LoginPageState extends State<LoginPage> {
                                   )
                                 : const Text('Log In'),
                           ),
-                          if (loginController.loginState.errorMessage != null)
+                          if (loginController.loginState.errorMessage !=
+                              null) ...[
+                            const SizedBox(height: AppSpacing.s),
                             Padding(
                               padding: const EdgeInsets.only(
                                 bottom: AppSpacing.s,
                               ),
                               child: Text(
                                 loginController.loginState.errorMessage!,
-                                style: const TextStyle(color: Colors.red),
+                                style: TextStyle(color: colorScheme.error),
+                                textAlign: TextAlign.center,
                               ),
                             ),
+                            const SizedBox(height: AppSpacing.s),
+                          ],
+                          const SizedBox(height: AppSpacing.l),
                           RichText(
+                            textAlign: TextAlign.center,
                             text: TextSpan(
                               style: textTheme.bodySmall,
                               children: [
-                                const TextSpan(
-                                  text: "Don't have an account? ",
-                                ),
+                                const TextSpan(text: "Don't have an account? "),
                                 WidgetSpan(
                                   child: InternalLink(
                                     text: 'Sign up',
