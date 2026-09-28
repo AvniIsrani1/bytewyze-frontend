@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:local_fork/core/theme/app_theme.dart';
 import 'package:local_fork/features/authentication/signup/signup_page.dart';
 
-void main() {
+void main() { 
   // debugPaintSizeEnabled = true;
   runApp(const MyApp());
 }
