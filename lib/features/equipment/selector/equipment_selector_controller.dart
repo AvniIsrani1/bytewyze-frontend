@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:local_fork/core/models/models.dart';
 import 'package:local_fork/features/equipment/equipment_repository.dart';
 import 'equipment_selector_state.dart';
 
@@ -8,27 +9,38 @@ class EquipmentSelectorController extends ChangeNotifier {
   EquipmentSelectorState _state = const EquipmentSelectorState();
   EquipmentSelectorState get state => _state;
 
-  // Convenience: the ordered list of category names, e.g. ['Cooking Appliances', 'Cookware']
-  // TODO: return _repository.categories
+  List<String> get categories => _repository.categories;
 
-  // Convenience: the equipment items for whatever category the user is currently on
-  // TODO: use _repository.getByCategory(...) with the category at the current step index
+  List<Equipment> get currentCategoryItems =>
+      _repository.getByCategory(categories[_state.currentStepIndex]);
 
-  // TODO: isSelected(String id) -> bool
-  //   check whether id is in _state.selectedEquipmentIds
+  bool get isFirstStep => _state.currentStepIndex == 0;
+  bool get isLastStep => _state.currentStepIndex == categories.length - 1;
 
-  // TODO: toggleItem(String id)
-  //   if id is already selected, remove it; otherwise add it
-  //   build a new Set (don't mutate the old one directly)
-  //   _state = _state.copyWith(selectedEquipmentIds: ...)
-  //   notifyListeners()
+  bool isSelected(String id) => _state.selectedEquipmentIds.contains(id);
 
-  // TODO: nextStep()
-  //   only increment currentStepIndex if it's not already the last category
-  //   _state = _state.copyWith(currentStepIndex: ...)
-  //   notifyListeners()
+  void toggleItem(String id) {
+    final updated = Set<String>.from(_state.selectedEquipmentIds);
+    if (updated.contains(id)) {
+      updated.remove(id);
+    } else {
+      updated.add(id);
+    }
+    _state = _state.copyWith(selectedEquipmentIds: updated);
+    notifyListeners();
+  }
 
-  // TODO: previousStep()
-  //   only decrement if currentStepIndex > 0
-  //   same copyWith + notifyListeners() pattern
+  void nextStep() {
+    if (!isLastStep) {
+      _state = _state.copyWith(currentStepIndex: _state.currentStepIndex + 1);
+      notifyListeners();
+    }
+  }
+
+  void previousStep() {
+    if (!isFirstStep) {
+      _state = _state.copyWith(currentStepIndex: _state.currentStepIndex - 1);
+      notifyListeners();
+    }
+  }
 }
