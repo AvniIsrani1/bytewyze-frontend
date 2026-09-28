@@ -1,6 +1,11 @@
 class Equipment {
   final String id;
   final String name;
+  final String category;
 
-  Equipment({required this.id, required this.name});
+  const Equipment({
+    required this.id,
+    required this.name,
+    required this.category,
+  });
 }
