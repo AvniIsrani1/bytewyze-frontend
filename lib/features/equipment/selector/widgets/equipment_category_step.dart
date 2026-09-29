@@ -54,7 +54,7 @@ class EquipmentCategoryStep extends StatelessWidget {
                   ),
                   child: Text(
                     entry.key,
-                    style: textTheme.bodySmall?.copyWith(
+                    style: textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: colorScheme.primary,
                     ),
@@ -101,7 +101,9 @@ class _EquipmentTile extends StatelessWidget {
           vertical: AppSpacing.xs,
         ),
         clipBehavior: Clip.hardEdge,
-        decoration: const BoxDecoration(),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+        ),
         child: Stack(
           fit: StackFit.expand,
           children: [
