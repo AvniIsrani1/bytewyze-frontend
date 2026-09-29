@@ -156,7 +156,8 @@ been removed from the widget tree.
                                 TODO: Consider timing of SnackBar display, slow reaction time rn
                               */
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('${item.name} removed')),
+                                SnackBar(content: Text('${item.name} removed'),
+                                         duration: const Duration(seconds: 1)),
                               );
                             },
                             icon: const Icon(Icons.delete_outline),
