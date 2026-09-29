@@ -10,4 +10,6 @@ class Equipment {
     required this.category,
     required this.subcategory,
   });
+
+  String get imagePath => 'assets/images/equipment/$id.jpg';
 }

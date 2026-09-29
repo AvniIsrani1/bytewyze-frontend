@@ -43,4 +43,7 @@ class EquipmentSelectorController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  List<Equipment> get selectedEquipment =>
+    _repository.getSelected(_state.selectedEquipmentIds);
 }

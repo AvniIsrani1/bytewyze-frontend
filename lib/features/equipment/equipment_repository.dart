@@ -44,4 +44,7 @@ class EquipmentRepository {
 
   List<Equipment> getByCategory(String category) =>
       _allEquipment.where((e) => e.category == category).toList();
+
+  List<Equipment> getSelected(Set<String> ids) =>
+    _allEquipment.where((e) => ids.contains(e.id)).toList();
 }

@@ -37,14 +37,16 @@ class _EquipmentSelectorScreenState extends State<EquipmentSelectorScreen> {
   }
 
   void _handleNext() {
-    if (controller.isLastStep) {
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (_) => const EquipmentInventoryScreen()),
-      );
-    } else {
-      controller.nextStep();
-    }
+  if (controller.isLastStep) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => EquipmentInventoryScreen(controller: controller),
+      ),
+    );
+  } else {
+    controller.nextStep();
   }
+}
 
   @override
   Widget build(BuildContext context) {
