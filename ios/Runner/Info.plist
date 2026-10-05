@@ -26,6 +26,9 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<!-- Required for barcode scanning -->
+	<key>NSCameraUsageDescription</key>
+	<string>Local Fork uses the camera to scan grocery barcodes and add items to your pantry.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
