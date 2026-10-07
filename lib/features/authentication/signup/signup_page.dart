@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:local_fork/core/theme/app_spacing.dart';
 import 'package:local_fork/core/util/internal_link.dart';
 import 'package:local_fork/core/util/logo.dart';
 import 'package:local_fork/core/util/overall_padding.dart';
 import 'package:local_fork/features/authentication/signup/signup_controller.dart';
 import 'package:local_fork/features/authentication/login/login_page.dart';
+import 'package:local_fork/features/authentication/signup/password_checklist.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key, required this.title});
@@ -44,6 +44,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: LayoutBuilder(
@@ -63,7 +64,11 @@ class _SignupPageState extends State<SignupPage> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Center(child: Logo(radius: 100)),
-                          Text('Create Account', style: textTheme.titleLarge, textAlign: TextAlign.center,),
+                          Text(
+                            'Create Account',
+                            style: textTheme.titleLarge,
+                            textAlign: TextAlign.center,
+                          ),
                           const SizedBox(height: AppSpacing.xl),
                           TextFormField(
                             controller: signupController.emailController,
@@ -78,6 +83,24 @@ class _SignupPageState extends State<SignupPage> {
                             validator: signupController.validatePassword,
                             decoration: InputDecoration(labelText: 'Password'),
                             obscureText: true,
+                            style: textTheme.bodyMedium,
+                          ),
+                          const SizedBox(height: AppSpacing.s),
+                          PasswordChecklist(
+                            password: signupController.password,
+                          ),
+                          const SizedBox(height: AppSpacing.m),
+                          TextFormField(
+                            controller:
+                                signupController.confirmPasswordController,
+                            validator: signupController.validateConfirmPassword,
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            decoration: InputDecoration(
+                              labelText: 'Confirm Password',
+                            ),
+                            obscureText: true,
+                            style: textTheme.bodyMedium,
                           ),
                           const SizedBox(height: AppSpacing.xl),
                           ElevatedButton(
@@ -94,7 +117,8 @@ class _SignupPageState extends State<SignupPage> {
                                   )
                                 : const Text('Sign Up'),
                           ),
-                          if (signupController.signupState.errorMessage != null)...[
+                          if (signupController.signupState.errorMessage !=
+                              null) ...[
                             const SizedBox(height: AppSpacing.s),
                             Padding(
                               padding: const EdgeInsets.only(
@@ -102,11 +126,11 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                               child: Text(
                                 signupController.signupState.errorMessage!,
-                                style: const TextStyle(color: Colors.red),
+                                style: TextStyle(color: colorScheme.error),
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                            const SizedBox(height: AppSpacing.s)
+                            const SizedBox(height: AppSpacing.s),
                           ],
                           const SizedBox(height: AppSpacing.l),
                           RichText(
@@ -120,7 +144,10 @@ class _SignupPageState extends State<SignupPage> {
                                 WidgetSpan(
                                   child: InternalLink(
                                     text: 'Login',
-                                    onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_) => const LoginPage()),
+                                    onTap: () => Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (_) => const LoginPage(),
+                                      ),
                                     ),
                                   ),
                                 ),

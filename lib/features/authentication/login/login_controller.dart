@@ -46,7 +46,7 @@ class LoginController extends ChangeNotifier {
     }
 
     // update state fields
-    _setState(loginState.copyWith(isSubmitting: true, errorMessage: null));
+    _setState(loginState.copyWith(isSubmitting: true, clearError: true));
 
     try {
       final email = emailController.text.trim();
