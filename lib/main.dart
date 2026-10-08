@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:local_fork/core/theme/app_theme.dart';
 import 'package:local_fork/features/authentication/signup/signup_page.dart';
 import 'package:local_fork/features/onboarding/onboarding_page.dart';
 import 'package:local_fork/features/onboarding/onboarding_repository.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   // debugPaintSizeEnabled = true;
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
 
   // check if this is the first download of the app (if yes, onboarding flow will be followed)
   final isInitialOnboarding = await OnboardingRepository()

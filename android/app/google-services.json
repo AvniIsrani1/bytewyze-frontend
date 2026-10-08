@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "100111416411",
+    "project_id": "local-fork-firebase",
+    "storage_bucket": "local-fork-firebase.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100111416411:android:e705bf0de0833581cf537e",
+        "android_client_info": {
+          "package_name": "com.bytewyze.local_fork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100111416411-a67gh9q5ab423rfq7e84652k39rpjc0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bytewyze.local_fork",
+            "certificate_hash": "0ec8df00cc3cfe5e325fad922de7969886e922e4"
+          }
+        },
+        {
+          "client_id": "100111416411-vtelkoqkmnq8ftgmu79ekoq0hnioa3l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBD-XeFAODXrXOe1sEumoIInz3Bne9ZmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100111416411-vtelkoqkmnq8ftgmu79ekoq0hnioa3l0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "100111416411-h67utpvkfrukuu0qhvh1h5jek2fntfsj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bytewyze.localFork"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

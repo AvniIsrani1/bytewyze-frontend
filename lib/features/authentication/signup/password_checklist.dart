@@ -14,38 +14,52 @@ class PasswordChecklist extends StatelessWidget {
     final pendingColor = Theme.of(context).colorScheme.onSurfaceVariant;
     final successColor = context.appColors.success;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: PasswordRequirement.all.map((requirement) {
-        final isMet = requirement.isSatisfied(password);
-        final color = isMet ? successColor : pendingColor;
+    final items = PasswordRequirement.all.map((requirement) {
+      final isMet = requirement.isSatisfied(password);
+      final color = isMet ? successColor : pendingColor;
 
-        return Padding(
-          padding: const EdgeInsets.only(bottom: AppSpacing.xs),
-          child: Semantics(
-            label: '${requirement.label}: ${isMet ? "met" : "not met"}',
-            excludeSemantics: true,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  isMet ? Icons.check_circle : Icons.circle_outlined,
-                  size: 16,
-                  color: color,
+      return Padding(
+        padding: const EdgeInsets.only(bottom: AppSpacing.xs),
+        child: Semantics(
+          label: '${requirement.label}: ${isMet ? "met" : "not met"}',
+          excludeSemantics: true,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                isMet ? Icons.check_circle : Icons.circle_outlined,
+                size: 16,
+                color: color,
+              ),
+              const SizedBox(width: AppSpacing.s),
+              Expanded(
+                child: Text(
+                  requirement.label,
+                  style: textTheme.bodySmall?.copyWith(color: color),
                 ),
-                const SizedBox(width: AppSpacing.s),
-                Expanded(
-                  child: Text(
-                    requirement.label,
-                    style: textTheme.bodySmall?.copyWith(color: color),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      }).toList(),
+        ),
+      );
+    }).toList();
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: items.sublist(0, 3),
+          ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: items.sublist(3),
+          ),
+        ),
+      ],
     );
-  
   }
 }
