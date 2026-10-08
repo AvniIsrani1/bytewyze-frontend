@@ -1,8 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Barcode scanning needs the camera -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!-- Product lookups and product images need the network -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Not required: a device w/out camera can still add items by typing barcode, so those should not be excluded -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"/>
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false"/>
+
     <application
         android:label="local_fork"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
