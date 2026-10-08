@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:local_fork/core/theme/app_spacing.dart';
 import 'package:local_fork/core/util/internal_link.dart';
 import 'package:local_fork/core/util/logo.dart';
+import 'package:local_fork/auth/widget/google_sign_in_section.dart';
 import 'package:local_fork/core/util/overall_padding.dart';
 import 'package:local_fork/features/authentication/login/login_controller.dart';
 
@@ -109,6 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             const SizedBox(height: AppSpacing.s),
                           ],
+                          const SizedBox(height: AppSpacing.l),
+                          const GoogleSignInSection(),
                           const SizedBox(height: AppSpacing.l),
                           RichText(
                             textAlign: TextAlign.center,
